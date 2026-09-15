@@ -3,7 +3,7 @@ let score = document.querySelector("#Score")
 let cashMulti = document.querySelector("#CashMulti")
 let upgrade1 = document.querySelector("#Upgrade1")
 
-let cashMultiValue = 1.5
+let cashMultiValue = 1
 
 
 
