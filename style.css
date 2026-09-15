@@ -1,0 +1,34 @@
+body {
+    background-color: #222;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+h1 {
+    color: orange;
+}
+
+.cookie {
+    width: 200px;
+    cursor: pointer;
+}
+
+.cookie:hover {
+    transform: scale(1.05);
+}
+
+button {
+    background-color: orange;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.shop {
+    background-color: #333;
+    padding: 20px;
+    margin: 20px auto;
+    width: 300px;
+}
