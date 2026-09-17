@@ -2,7 +2,7 @@ body {
     background-color: #222;
     color: white;
     font-family: Arial;
-    text-align: center;
+    text-align: left;
 }
 
 h1 {
@@ -16,14 +16,6 @@ h1 {
 
 .cookie:hover {
     transform: scale(1.05);
-}
-
-button {
-    background-color: orange;
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
 }
 
 .shop {
@@ -54,4 +46,15 @@ button {
     100% {
         transform: scale(1) rotate(0deg);
     }
+}
+
+body {
+    button {
+    background-color: rgb(228, 3, 25);
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
 }
