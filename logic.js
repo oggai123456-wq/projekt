@@ -60,7 +60,7 @@ upgrade1.addEventListener("click", function() {
 
     pricecount = upgrade1Price * currentUpgrade1
     price = pricecount * currentUpgrade1
-    upgrade1.innerText = "💰 More sell price: " + price
+    upgrade1.querySelector("p").innerText = "💰 More sell price: " + price
     Buystatus.innerText = "You bought an upgrade!"
         setTimeout(function() {
             Buystatus.innerText = ""
@@ -94,7 +94,7 @@ upgrade2.addEventListener("click", function() {
 
     pricecount = upgrade2Price * currentUpgrade2
     price = pricecount * currentUpgrade2
-    upgrade2.innerText = "🏷️ Cheaper Groceries: " + price
+    upgrade2.querySelector("p").innerText = "🏷️ Cheaper Groceries: " + price
     Buystatus.innerText = "You bought an upgrade!"
         setTimeout(function() {
             Buystatus.innerText = ""
@@ -128,7 +128,7 @@ upgrade3.addEventListener("click", function() {
 
     pricecount = upgrade3Price * currentUpgrade3
     price = pricecount * currentUpgrade3
-    upgrade3.innerText = "🔥 Industrial oven: " + price
+    upgrade3.querySelector("p").innerText  = "🔥 Industrial oven: " + price
     Buystatus.innerText = "You bought an upgrade!"
         setTimeout(function() {
             Buystatus.innerText = ""
@@ -174,7 +174,7 @@ rebirth.addEventListener("click", function() {
         upgrade2.innerText = "🏷️ Cheaper Groceries: 25"
         upgrade3.innerText = "🔥 Industrial oven: 120"
 
-        cashMulti.textContent = "Cash Multiplier: " + cashMultiValue
+        cashMulti.textContent = "💸 Cash Multiplier: " + cashMultiValue
 
         Buystatus.innerText = "You successfully Rebirthed!"
         setTimeout(function() {
