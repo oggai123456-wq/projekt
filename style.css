@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: #222;
     color: white;
@@ -36,6 +41,7 @@ button {
 #CookieButton {
     cursor: pointer;
     transition: transform 0.1s;
+    aspect-ratio: 1;
 }
 
 #CookieButton.clicked {
@@ -56,3 +62,15 @@ button {
     }
 }
 
+.CookieB {
+    font-size: 200px;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+.upgrade-container {
+    display: grid;
+}
