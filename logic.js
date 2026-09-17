@@ -170,9 +170,9 @@ rebirth.addEventListener("click", function() {
         cashPerClick += 1
         score.innerText = "Cash: " + cash
 
-        upgrade1.innerText = "💰 More sell price: 10"
-        upgrade2.innerText = "🏷️ Cheaper Groceries: 25"
-        upgrade3.innerText = "🔥 Industrial oven: 120"
+        upgrade1.querySelector("p").innerText = "💰 More sell price: 10"
+        upgrade2.querySelector("p").innerText = "🏷️ Cheaper Groceries: 25"
+        upgrade3.querySelector("p").innerText = "🔥 Industrial oven: 120"
 
         cashMulti.textContent = "💸 Cash Multiplier: " + cashMultiValue
 
