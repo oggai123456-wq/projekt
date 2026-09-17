@@ -145,14 +145,16 @@ upgrade3.addEventListener("click", function() {
 })
 
 rebirth.addEventListener("click", function() {
-    rebirthRequirements = rebirthCount * rebirthRequirements
 
-    console.log(rebirthRequirements)
+    let priceFirst = rebirthCount * rebirthRequirements
+    let price = priceFirst * rebirthCount
+
+    console.log(price)
     console.log(rebirthCount)
 
 
-    if(cash >= rebirthRequirements){
-        cash -= rebirthRequirements
+    if(cash >= price){
+        cash -= price
         
         // -------------------------
         currentUpgrade1 = 1
@@ -182,9 +184,11 @@ rebirth.addEventListener("click", function() {
             
         }, 2000)
 
+        rebirthCount += 1
+
 
     }else{
-        Buystatus.innerText = "Not enough Cash, need " + rebirthRequirements
+        Buystatus.innerText = "Not enough Cash, need " + price
         setTimeout(function() {
             Buystatus.innerText = ""
             
