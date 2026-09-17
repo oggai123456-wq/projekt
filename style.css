@@ -18,6 +18,14 @@ h1 {
     transform: scale(1.05);
 }
 
+button {
+    background-color: orange;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+
 .shop {
     background-color: #333;
     padding: 20px;
@@ -48,13 +56,3 @@ h1 {
     }
 }
 
-body {
-    button {
-    background-color: rgb(228, 3, 25);
-    border: none;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
-}
-
-}
