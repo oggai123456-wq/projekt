@@ -1,142 +1,237 @@
+
 let cookieButton = document.querySelector("#CookieButton")
 let score = document.querySelector("#Score")
 let cashMulti = document.querySelector("#CashMulti")
+let Buystatus = document.querySelector("#status")
+
+
+let autoClick = document.querySelector("#AutoclickerUpgrade")
+
+let autoClickers = 0
+let autoCashPerSecond = 5
+let autoclickPrice = 150
 
 
 let rebirth = document.querySelector("#Rebirth")
-let rebirthRequirements = 1000
-let rebirthCashMultiplier = 5
-let rebirthCount = 1
 
-// upgrades --------------------------------------------------
+let rebirthRequirements = 1000
+let rebirthCount = 1
+let rebirthCashMultiplier = 1
+
+
 let upgrade1 = document.querySelector("#upgrade1")
 let upgrade2 = document.querySelector("#upgrade2")
 let upgrade3 = document.querySelector("#upgrade3")
-// -----------------------------------------------------------
 
-let cashMultiValue = 1
-let cashPerClick = 1
-// --------------------------
+
 let currentUpgrade1 = 1
 let currentUpgrade2 = 1
 let currentUpgrade3 = 1
 
+
 let upgrade1Price = 10
 let upgrade2Price = 25
 let upgrade3Price = 120
-// ------------------------------
-let scoreValue = 0
-let cash = scoreValue
 
-// --------
-let Buystatus = document.querySelector("#status")
-// -------
+let cash = 0
 
-cookieButton.addEventListener("click", function() {
-    cash += cashPerClick * cashMultiValue
+let cashMultiValue = 1
+let cashPerClick = 1
+
+
+function updateScore() {
     score.innerText = Math.round(cash).toLocaleString()
+}
 
-    // Start animation
+
+let statusTimer = 2000
+
+function showStatus(message){
+
+    Buystatus.innerText = message
+
+    clearTimeout(statusTimer)
+
+    statusTimer = setTimeout(function(){
+        Buystatus.innerText = ""
+    }, 2000)
+}
+
+// ==========================================================
+// COOKIE
+
+cookieButton.addEventListener("click", function(){
+
+    cash += cashPerClick * cashMultiValue
+
+    updateScore()
+
     cookieButton.classList.remove("clicked")
+
     void cookieButton.offsetWidth
+
     cookieButton.classList.add("clicked")
 })
 
-upgrade1.addEventListener("click", function() {
-    let pricecount = upgrade1Price * currentUpgrade1
-    let price = pricecount * currentUpgrade1
+// ==========================================================
+// AUTOCLICKER
 
-    console.log(cash)
-    console.log(price)
+autoClick.addEventListener("click", function(){
 
-    if(cash >= price){
-    cash -= price
-    score.innerText = Math.round(cash).toLocaleString()
+    let price = autoclickPrice
 
-    cashMultiValue = Math.round((cashMultiValue + 0.5) * 10) / 10
-    cashMulti.textContent = "Cash Multiplier: " + cashMultiValue
+    if (cash >= price) {
 
-    currentUpgrade1 += 1
-
-    pricecount = upgrade1Price * currentUpgrade1
-    price = pricecount * currentUpgrade1
-    upgrade1.innerText = "More sell price: " + price
-    Buystatus.innerText = "good"
-    }else{
-        Buystatus.innerText = "Error"
-    }
-
-})
-
-upgrade2.addEventListener("click", function() {
-    let pricecount = upgrade2Price * currentUpgrade2
-    let price = pricecount * currentUpgrade2
-
-    console.log(cash)
-    console.log(price)
-
-    if(cash >= price){
-    cash -= price
-    score.innerText = Math.round(cash)
-
-    cashMultiValue = Math.round((cashMultiValue + 0.75) * 10) / 10
-    cashMulti.textContent = "Cash Multiplier: " + cashMultiValue
-
-    currentUpgrade2 += 1
-
-    pricecount = upgrade2Price * currentUpgrade2
-    price = pricecount * currentUpgrade2
-    upgrade2.innerText = "Cheaper Groceries: " + price
-    Buystatus.innerText = "good"
-    }else{
-        Buystatus.innerText = "Error"
-    }
-
-})
-
-upgrade3.addEventListener("click", function() {
-    let pricecount = upgrade3Price * currentUpgrade3
-    let price = pricecount * currentUpgrade3
-
-    console.log(cash)
-    console.log(price)
-
-    if(cash >= price){
-    cash -= price
-    score.innerText = Math.round(cash)
-
-    cashMultiValue = Math.round((cashMultiValue + 1.25) * 10) / 10
-    cashMulti.textContent = "Cash Multiplier: " + cashMultiValue
-
-    currentUpgrade3 += 1
-
-    pricecount = upgrade3Price * currentUpgrade3
-    price = pricecount * currentUpgrade3
-    upgrade3.innerText = "Cheaper Groceries: " + price
-    Buystatus.innerText = "good"
-    }else{
-        Buystatus.innerText = "Not enough Cash"
-        setTimeout(function() {
-            Buystatus.innerText = ""
-            
-        }, 2000)
-    }
-
-})
-
-rebirth.addEventListener("click", function() {
-
-    let priceFirst = rebirthCount * rebirthRequirements
-    let price = priceFirst * rebirthCount
-
-    console.log(price)
-    console.log(rebirthCount)
-
-
-    if(cash >= price){
         cash -= price
-        
-        // -------------------------
+
+        autoClickers += 1
+
+        autoclickPrice = Math.round(autoclickPrice * 2)
+
+        updateScore()
+
+        autoClick.querySelector("p").innerText =
+            "🖱️ Autoclicker: " + autoclickPrice.toLocaleString()
+
+        showStatus("Autoclicker bought!")
+
+    } else {
+
+        showStatus("Not enough Cash")
+    }
+})
+
+// ==========================================================
+// AUTOCLICKER
+
+setInterval(function(){
+
+    if (autoClickers > 0) {
+
+        cash += autoCashPerSecond * autoClickers * cashMultiValue
+
+        updateScore()
+    }
+
+}, 1000)
+
+//=================================================================
+// UPGRADE 2
+
+upgrade1.addEventListener("click", function(){
+
+    let price = upgrade1Price * currentUpgrade1
+
+    if (cash >= price){
+
+        cash -= price
+
+        cashMultiValue =
+            Math.round((cashMultiValue + 0.5) * 10) / 10
+
+        currentUpgrade1 += 1
+
+        updateScore()
+
+        cashMulti.textContent =
+            "💸 Cash Multiplier: " + cashMultiValue
+
+        let nextPrice =
+            upgrade1Price * currentUpgrade1
+
+        upgrade1.querySelector("p").innerText =
+            "💰 More sell price: " + nextPrice.toLocaleString()
+
+        showStatus("Upgrade bought!")
+
+    } else {
+        showStatus("Not enough Cash")
+    }
+})
+
+//=================================================================
+// UPRGADE 2
+
+upgrade2.addEventListener("click", function(){
+
+    let price = upgrade2Price * currentUpgrade2
+
+    if (cash >= price){
+
+        cash -= price
+
+        cashMultiValue =
+            Math.round((cashMultiValue + 0.75) * 10) / 10
+
+        currentUpgrade2 += 1
+
+        updateScore()
+
+        cashMulti.textContent =
+            "💸 Cash Multiplier: " + cashMultiValue
+
+        let nextPrice =
+            upgrade2Price * currentUpgrade2
+
+        upgrade2.querySelector("p").innerText =
+            "🏷️ Cheaper Groceries: " + nextPrice.toLocaleString()
+
+        showStatus("Upgrade bought!")
+
+    } else {
+        showStatus("Not enough Cash")
+    }
+})
+
+//=================================================================
+// UPGRADE 3
+
+upgrade3.addEventListener("click", function(){
+
+    let price = upgrade3Price * currentUpgrade3
+
+    if (cash >= price){
+
+        cash -= price
+
+        cashMultiValue =
+            Math.round((cashMultiValue + 1.25) * 10) / 10
+
+        currentUpgrade3 += 1
+
+        updateScore()
+
+        cashMulti.textContent =
+            "💸 Cash Multiplier: " + cashMultiValue
+
+        let nextPrice =
+            upgrade3Price * currentUpgrade3
+
+        upgrade3.querySelector("p").innerText =
+            "🔥 Industrial oven: " + nextPrice.toLocaleString()
+
+        showStatus("Upgrade bought!")
+
+    } else {
+        showStatus("Not enough Cash")
+    }
+})
+
+//=================================================================
+// REBIRTH
+
+rebirth.addEventListener("click", function(){
+
+    let price = rebirthRequirements * rebirthCount
+
+    if (cash >= price){
+
+        cash = 0
+
+        autoClickers = 0
+        autoCashPerSecond = 50
+        autoclickPrice = 150
+
         currentUpgrade1 = 1
         currentUpgrade2 = 1
         currentUpgrade3 = 1
@@ -144,36 +239,35 @@ rebirth.addEventListener("click", function() {
         upgrade1Price = 10
         upgrade2Price = 25
         upgrade3Price = 120
-        // -------------------------
 
-        cash = 0
-        rebirthCashMultiplier *= rebirthCount
+        rebirthCount += 1
+        rebirthCashMultiplier += 1
         cashMultiValue = rebirthCashMultiplier
-        cashPerClick += 1
-        score.innerText = "Cash: " + cash
+        cashPerClick = rebirthCount
 
-        upgrade1.querySelector("p").innerText = "💰 More sell price: 10"
-        upgrade2.querySelector("p").innerText = "🏷️ Cheaper Groceries: 25"
-        upgrade3.querySelector("p").innerText = "🔥 Industrial oven: 120"
+        updateScore()
 
         cashMulti.textContent = "💸 Cash Multiplier: " + cashMultiValue
 
-        Buystatus.innerText = "You successfully Rebirthed!"
-        setTimeout(function() {
-            Buystatus.innerText = ""
-            
-        }, 2000)
+        autoClick.querySelector("p").innerText = "🖱️ Autoclicker: 150"
 
-        rebirthCount += 1
+        upgrade1.querySelector("p").innerText = "💰 More sell price: 10"
 
+        upgrade2.querySelector("p").innerText = "🏷️ Cheaper Groceries: 25"
 
-    }else{
-        Buystatus.innerText = "Not enough Cash, need " + price
-        setTimeout(function() {
-            Buystatus.innerText = ""
-            
-        }, 2000)
+        upgrade3.querySelector("p").innerText = "🔥 Industrial oven: 120"
 
+        showStatus("You successfully Rebirthed!")
+
+    } else {
+
+        let needed = price - cash
+
+        showStatus(
+            "Not enough Cash! Need " +
+            needed.toLocaleString() +
+            " more."
+        )
     }
-
 })
+
