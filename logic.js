@@ -5,7 +5,7 @@ let cashMulti = document.querySelector("#CashMulti")
 
 let rebirth = document.querySelector("#Rebirth")
 let rebirthRequirements = 1000
-let rebirthCashMultiplier = 10
+let rebirthCashMultiplier = 5
 let rebirthCount = 1
 
 // upgrades --------------------------------------------------
